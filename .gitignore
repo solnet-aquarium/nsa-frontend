@@ -1,0 +1,13 @@
+.DS_Store
+dist/
+node_modules/
+app/vendor
+config/main.coffee
+app/config/main.coffee
+bower_components
+app/coffee/modules/locales/locale*.coffee
+*.swp
+*.swo
+tags
+tmp/
+conf/
