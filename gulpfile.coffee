@@ -290,7 +290,5 @@ gulp.task "default", [
     "styles",
     "app-watch",
     "jslibs-watch",
-    "jade-deploy",
-    "express",
-    "watch"
+    "jade-deploy"
 ]

@@ -9,7 +9,8 @@ html(lang="en", ng-app="nsa")
         //-meta(name="viewport", content="width=device-width, user-scalable=no")
         link(rel="stylesheet", href="/styles/main.css")
         link(rel="icon", type="image/png", href="/images/favicon.png")
-
+        block script
+          script(src='/socket.io/socket.io.js')
 
     body(tg-main)
         //- include partials/views/modules/projects-nav
@@ -36,5 +37,12 @@ html(lang="en", ng-app="nsa")
 
         //- include partials/views/modules/loader
 
-        script(src="/js/libs.js?v=#{v}")
+        p Hello World 1
+
+        //- script(src="/js/libs.js?v=#{v}")
         script(src="/js/app.js?v=#{v}")
+        script(type='text/javascript').
+          var socket = io.connect('http://localhost:3000/timeping');
+          socket.on('timeping', function(timeping) {
+            console.log("Got time: " + timeping.time);
+          });
