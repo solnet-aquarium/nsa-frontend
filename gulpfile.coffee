@@ -46,8 +46,8 @@ paths.svg = paths.app + "svg/**/*"
 paths.css = paths.app + "styles/vendor/*.css"
 paths.locales = paths.app + "locales/**/*.json"
 paths.stylus = [
-    "#{paths.app}/styles/**/*.stylus",
-    "#{paths.app}/plugins/**/*.stylus"
+    "#{paths.app}/styles/**/*.styl",
+    "#{paths.app}/plugins/**/*.styl"
   ]
 
 paths.coffee = [
@@ -102,7 +102,7 @@ gulp.task "stylus-compile", ->
     basePath: 'css'
   }
   use: nib(),
-  import: ['./node_modules/fluidity/index.styl'],
+
   compress: true
   }))
   .pipe(gulp.dest(paths.tmpStyles))
@@ -290,5 +290,6 @@ gulp.task "default", [
     "styles",
     "app-watch",
     "jslibs-watch",
+    "styles-watch",
     "jade-deploy"
 ]
