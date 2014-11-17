@@ -2,7 +2,7 @@ exports.files = function () {
     var base = process.cwd() + "/tmp/styles/";
     // include stylus styles here
     var files  = [
-      base + 'boot'
+      base + 'app'
     ];
 
     files = files.map(function (file) {

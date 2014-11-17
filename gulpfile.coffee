@@ -32,7 +32,7 @@ paths.app = "app/"
 paths.dist = "../public/"
 paths.tmp = "tmp/"
 paths.tmpStyles = paths.tmp + "styles/"
-paths.tmpStylesExtras = "#{paths.tmpStyles}/taiga-front-extras/**/*.css"
+paths.tmpStylesExtras = "#{paths.tmpStyles}/front-extras/**/*.css"
 paths.extras = "extras/"
 
 paths.jade = [
@@ -116,7 +116,7 @@ gulp.task "css-lint-app", ->
         .pipe(cache("csslint"))
         .pipe(gulpif(!isDeploy, csslintChannel()))
 
-gulp.task "css-join", ["css-lint-app"], ->
+gulp.task "css-join", ->
   gulp.src(mainStylus.concat([paths.tmpStylesExtras]))
         .pipe(concat("app.css"))
         .pipe(gulp.dest(paths.tmp))
@@ -134,8 +134,8 @@ gulp.task "delete-tmp-styles", (cb) ->
 
 gulp.task "styles-watch", ["css-app", "css-vendor"], ->
   _paths = [
-        paths.tmp + "vendor.css",
-        paths.tmp + "app.css"
+        paths.tmpStyles + "vendor.css",
+        paths.tmpStyles + "app.css"
     ]
 
   gulp.src(_paths)
