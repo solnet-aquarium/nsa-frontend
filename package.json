@@ -11,7 +11,7 @@
     "fluidity": "^0.2.0",
     "gulp": "^3.8.8",
     "gulp-cached": "0.0.3",
-    "gulp-changed": "^0.4.0",
+    "gulp-changed": "^1.0.0",
     "gulp-clean": "^0.2.4",
     "gulp-coffee": "^2.2.0",
     "gulp-coffeelint": "~0.4.0",
