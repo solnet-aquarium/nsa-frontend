@@ -25,6 +25,7 @@ insert = require("gulp-insert")
 runSequence = require('run-sequence')
 lazypipe = require('lazypipe')
 rimraf = require('rimraf')
+# plugins = require('gulp-load-plugins')(); use this in future
 
 mainStylus = require("./main-stylus").files
 
@@ -58,7 +59,18 @@ paths.coffee = [
     paths.app + "plugins/**/*.coffee"
   ]
 
-paths.js = []
+paths.js = [
+    paths.app + "vendor/jquery/dist/jquery.js",
+    paths.app + "vendor/lodash/dist/lodash.js",
+    paths.app + "vendor/angular/angular.js",
+    paths.app + "vendor/angular-route/angular-route.js",
+    paths.app + "vendor/angular-sanitize/angular-sanitize.js",
+    paths.app + "vendor/angular-animate/angular-animate.js",
+    paths.app + "vendor/i18next/i18next.js",
+    paths.app + "vendor/moment/min/moment-with-langs.js",
+    paths.app + "vendor/checksley/checksley.js",
+    paths.app + "plugins/**/*.js"
+  ]
 
 isDeploy = process.argv[process.argv.length - 1] == 'deploy'
 
@@ -172,20 +184,31 @@ gulp.task "coffee", ->
         .pipe(concat("app.js"))
         .pipe(gulp.dest(paths.tmp))
 
-gulp.task "jslibs-watch", ->
+gulp.task "jslibs", ->
   gulp.src(paths.js)
         .pipe(plumber())
         .pipe(concat("libs.js"))
-        .pipe(gulp.dest("dist/js/"))
+        .pipe(gulp.dest(paths.tmp))
+
+gulp.task "jslibs-watch",["jslibs"], ->
+  _paths = [
+        paths.tmp + "libs.js",
+  ]
+  gulp.src(_paths)
+        .pipe(concat("libs.js"))
+        .pipe(gulp.dest(paths.dist + "js/"))
 
 gulp.task "jslibs-deploy", ->
-  gulp.src(paths.js)
+  _paths = [
+        paths.tmp + "libs.js",
+  ]
+  gulp.src(_paths)
         .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(concat("libs.js"))
         .pipe(uglify({mangle:false, preserveComments: false}))
         .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest("dist/js/"))
+        .pipe(gulp.dest(paths.dist + "js/"))
 
 gulp.task "app-watch", ["coffee", "conf", "locales"], ->
   _paths = [
